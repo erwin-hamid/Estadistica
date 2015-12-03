@@ -1,0 +1,248 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>Agrofarmpi-Mobile</title>
+<!-- <link rel="stylesheet" href="css/login.css" />
+<link rel="stylesheet" href="css/inicio.css" /> -->
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.map"/>
+<link rel="stylesheet" href="css/jquery.mobile.external-png-1.4.5.min.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.icons-1.4.5.min.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.inline-png-1.4.5.min.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.inline-svg-1.4.5.min.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css"/>
+<link rel="stylesheet" href="css/index.css" />
+
+<!-- <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="js/fastclick.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+<script src="js/highcharts.js" type="text/javascript"></script>
+<script src="js/exporting.js"></script>  
+</head>
+
+<body> 
+
+<!-- Start of first page -->
+<div data-role="page" id="pag1">
+
+  <div data-role="header">
+    <div id="prueba">
+      <img src="img/hoja.png">
+      <p>Estadistica - Trabajo final</p>
+    </div>
+  </div><!-- /header -->
+
+  <div data-role="content"> 
+    <p><b>Tabla de valores,</b> por favor completa la tabla de valores con numeros separados por ',' comas.</p>
+    <div data-role="fieldcontain">
+       <textarea cols="40" rows="150" name="textarea" id="textarea1">166,160,161,150,162,160,165,167,164,160,162,161,168,163,156,173,160,155,164,168,155,152,163,160,155,155,169,151,170,164,154,161,156,172,153,157,156,158,158,161</textarea>
+ 
+       <p id="total_datos"></p>
+ 
+       <label for="nroClases" style="width: auto;"><strong>Numero clases:</strong></label>
+       <input type="number" value="5" name="nroClases" id="nroClases" data-mini="true" style="width:50%"/>
+
+       <br/>
+       <h4 style="margin-top: 10%;">Rango</h4>
+       <label for="rango"><strong>R</strong> = U - L</label>
+       <br/>
+       <p id="rango"><strong>R</strong> = 0</p>
+
+       <h4>Amplitud</h4>
+       <label for="rango"><strong>W</strong> = R / C</label>
+       <br/>
+       <p id="amplitud"><strong>W</strong> = 0</p>
+    </div>
+    <a href="#" data-role="button" data-mini="true" data-theme="b" id="btnCalculaTabla">Calcular tabla</a>
+  </div><!-- /content pag2-->
+
+  <div data-role="footer" data-position="fixed" data-theme="d">
+    <div data-role="navbar">
+      <ul> 
+         <li><a href="#pag1" data-iconpos="top" data-icon="plus" class="ui-btn-active ui-state-persist">Ingreso</a></li>
+         <li><a href="#pag2" data-iconpos="top" data-icon="home">Operación</a></li>
+         <li><a href="#pag3" data-iconpos="top" data-icon="grid">Graficas</a></li>
+        </ul>
+     </div>
+  </div><!-- /header -->
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="pag2">
+
+  <div data-role="header">
+    <div id="prueba">
+      <img src="img/hoja.png">
+      <p>Estadistica - Trabajo final</p>
+    </div>
+  </div><!-- /header -->
+
+  <div data-role="content"> 
+    <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke ui-table ui-table-columntoggle" data-column-btn-theme="b">
+              <thead>
+                <tr>
+                  <th data-priority="2" class="ui-table-priority-2">Clase</th>
+                  <th>Frecuencia</th>
+                  <th data-priority="1" class="ui-table-priority-3">Fronteras</th>
+                  <th data-priority="3" class="ui-table-priority-1">Marca</th>
+                  <th data-priority="5" class="ui-table-priority-5">F. relativa</th>
+                  <th data-priority="5" class="ui-table-priority-6">F. Acumulada</th>
+                  <th data-priority="5" class="ui-table-priority-7">F. Relativa Acum</th>
+                </tr>
+              </thead>
+              <tbody>
+            <!--     <tr>
+                  <th class="ui-table-priority-2">1</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external" class="ui-link">Citizen Kane</a></td>
+                  <td class="ui-table-priority-3">1941</td>
+                  <td class="ui-table-priority-1">100%</td>
+                  <td class="ui-table-priority-5">74</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">2</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external" class="ui-link">Casablanca</a></td>
+                  <td class="ui-table-priority-3">1942</td>
+                  <td class="ui-table-priority-1">97%</td>
+                  <td class="ui-table-priority-5">64</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">3</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external" class="ui-link">The Godfather</a></td>
+                  <td class="ui-table-priority-3">1972</td>
+                  <td class="ui-table-priority-1">97%</td>
+                  <td class="ui-table-priority-5">87</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">4</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external" class="ui-link">Gone with the Wind</a></td>
+                  <td class="ui-table-priority-3">1939</td>
+                  <td class="ui-table-priority-1">96%</td>
+                  <td class="ui-table-priority-5">87</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">5</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external" class="ui-link">Lawrence of Arabia</a></td>
+                  <td class="ui-table-priority-3">1962</td>
+                  <td class="ui-table-priority-1">94%</td>
+                  <td class="ui-table-priority-5">87</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">6</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external" class="ui-link">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
+                  <td class="ui-table-priority-3">1964</td>
+                  <td class="ui-table-priority-1">92%</td>
+                  <td class="ui-table-priority-5">74</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">7</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external" class="ui-link">The Graduate</a></td>
+                  <td class="ui-table-priority-3">1967</td>
+                  <td class="ui-table-priority-1">91%</td>
+                  <td class="ui-table-priority-5">122</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">8</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external" class="ui-link">The Wizard of Oz</a></td>
+                  <td class="ui-table-priority-3">1939</td>
+                  <td class="ui-table-priority-1">90%</td>
+                  <td class="ui-table-priority-5">72</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">9</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external" class="ui-link">Singin' in the Rain</a></td>
+                  <td class="ui-table-priority-3">1952</td>
+                  <td class="ui-table-priority-1">89%</td>
+                  <td class="ui-table-priority-5">85</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr>
+                <tr>
+                  <th class="ui-table-priority-2">10</th>
+                  <td class="title"><a href="http://en.wikipedia.org/wiki/Inception" data-rel="external" class="ui-link">Inception</a></td>
+                  <td class="ui-table-priority-3">2010</td>
+                  <td class="ui-table-priority-1">84%</td>
+                  <td class="ui-table-priority-5">78</td>
+                  <td class="ui-table-priority-6">74</td>
+                  <td class="ui-table-priority-7">74</td>
+                </tr> -->
+              </tbody>
+            </table>
+
+            
+            <h4 style="margin-top: 10%;">* Limite inferior</h4>
+            <p id="limInf"><strong>Lim inf</strong> = 0</p>
+            
+            <h4 style="margin-top: 5%;">* Limite superior</h4>
+            <p id="limSup"><strong>Lim sup</strong> = 0</p>
+            
+            <h4 style="margin-top: 5%;">* Marca de clase</h4>
+            <p id="marca"><strong>Marca</strong> = 0</p>
+  </div><!-- /content -->
+
+  <div data-role="footer" data-position="fixed" data-theme="a">
+    <div data-role="navbar">
+      <ul> 
+         <li><a href="#pag1" data-iconpos="top" data-icon="plus">Ingreso</a></li>
+         <li><a href="#pag2" data-iconpos="top" data-icon="home" class="ui-btn-active ui-state-persist">Operación</a></li>
+         <li><a href="#pag3" data-iconpos="top" data-icon="grid">Graficas</a></li>
+        </ul>
+     </div>
+  </div><!-- /header -->
+</div>
+
+<!-- Start of second page -->
+<div data-role="page" id="pag3">
+
+  <div data-role="header">
+    <div id="prueba">
+      <img src="img/hoja.png">
+      <p>Estadistica - Trabajo final</p>
+    </div>
+  </div><!-- /header -->
+
+  <div data-role="content"> 
+       <div id="container" style="min-width: 95%; margin: 0 auto"></div>
+       <div id="container2" style="min-width: 95%; margin: 0 auto"></div>
+       <div id="container3" style="min-width: 95%; margin: 0 auto"></div>
+  </div><!-- /content -->
+
+  <div data-role="footer" data-position="fixed" data-theme="a">
+    <div data-role="navbar">
+      <ul> 
+         <li><a href="#pag1" data-iconpos="top" data-icon="plus">Ingreso</a></li>
+         <li><a href="#pag2" data-iconpos="top" data-icon="home">Operación</a></li>
+         <li><a href="#pag3" data-iconpos="top" data-icon="grid" class="ui-btn-active ui-state-persist">Graficas</a></li>
+        </ul>
+     </div>
+  </div><!-- /header -->
+</div>
+
+</body> 
+<!-- <script type="text/javascript" src="cordova.js"></script> -->
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+  app.initialize();
+</script>
+</body> 
+</html>
+

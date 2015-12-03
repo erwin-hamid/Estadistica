@@ -1,0 +1,13 @@
+#prueba img{
+ margin: 0px auto !important;
+ width: 48px !important;
+ height: 48px !important;
+ float:left;
+}
+
+#prueba{
+  width: 305px !important;
+  margin: 10px auto !important;
+  padding-top: 1px !important;
+}
+div.ui-input-text { width: 20% !important }
